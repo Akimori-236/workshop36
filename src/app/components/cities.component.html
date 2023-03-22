@@ -1,16 +1,20 @@
-<div class="col-6">
-  <form class="form" [formGroup]="newCityForm" (ngSubmit)="addCity()">
-    <div>
-      <label class="form-label m-3" for="newCityID">City:</label>
+<div class="container">
+  <form class="form row g-3" [formGroup]="newCityForm" (ngSubmit)="addCity()">
+    <div class="col-auto">
+      <label class="form-label" for="newCityID">City:</label>
+    </div>
+    <div class="col-auto">
       <input
-        class="m-3"
+        class="form-control"
         type="text"
         name="newCity"
         id="newCityID"
         formControlName="newCity"
       />
+    </div>
+    <div class="col-auto">
       <button
-        class="btn btn-outline-primary m-3"
+        class="btn btn-outline-primary"
         type="submit"
         [disabled]="newCityForm.invalid"
       >
@@ -21,8 +25,10 @@
 
   <table class="table table-hover">
     <tbody>
-      <tr *ngFor="let city of cityList">
-        <td>{{ city | titlecase }}</td>
+      <tr class="row" *ngFor="let city of cityList">
+        <td class="d-flex justify-content-center">
+          <a class="px-5 py-2" [routerLink]="['/weather/', city]">{{ city | titlecase }}</a>
+        </td>
       </tr>
     </tbody>
   </table>
