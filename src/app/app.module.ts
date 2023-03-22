@@ -4,17 +4,27 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { CitiesComponent } from './components/cities.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+import { WeatherComponent } from './components/weather.component';
+import { WeatherService } from './Weather.service';
+
+const appRoutes: Routes = [
+  { path: '', component: CitiesComponent},
+  { path: 'weather/:city', component: WeatherComponent},
+]
 
 @NgModule({
   declarations: [
     AppComponent,
-    CitiesComponent
+    CitiesComponent,
+    WeatherComponent
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [WeatherService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
