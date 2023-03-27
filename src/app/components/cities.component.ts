@@ -43,7 +43,7 @@ export class CitiesComponent implements OnInit {
     const newcountryValue: string = countryCtrl.value.toLowerCase().trim()
     const newEntry = { name: newcityValue, countryCode: newcountryValue }
     // CHECK IF ENTRY EXISTS
-    if (!this.cityList.includes(newEntry)) {
+    if (!this.cityList.some(city => city.name == newEntry.name)) {
       this.cityList.push(newEntry)
       this.cityList.sort((a, b) => (a.name > b.name) ? 1 : -1)
     }
