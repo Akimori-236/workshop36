@@ -4,3 +4,8 @@ export interface SimpleWeather {
   description: string
   icon: string
 }
+
+export interface City {
+  name: string
+  countryCode: string
+}

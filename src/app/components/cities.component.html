@@ -1,17 +1,34 @@
 <div class="container">
-  <form class="form row g-3" [formGroup]="newCityForm" (ngSubmit)="addCity()">
-    <div class="col-auto">
-      <label class="form-label" for="newCityID">City:</label>
+  <form class="form g-3" [formGroup]="newCityForm" (ngSubmit)="addCity()">
+    <div class="row">
+      <div class="col-auto">
+        <label class="form-label" for="newCityID">City:</label>
+      </div>
+      <div class="col-auto">
+        <input
+          class="form-control"
+          type="text"
+          name="newCity"
+          id="newCityID"
+          formControlName="newCity"
+        />
+      </div>
     </div>
-    <div class="col-auto">
-      <input
-        class="form-control"
-        type="text"
-        name="newCity"
-        id="newCityID"
-        formControlName="newCity"
-      />
+    <div class="row">
+      <div class="col-auto">
+        <label class="form-label" for="newCityID">Country Code:</label>
+      </div>
+      <div class="col-auto">
+        <input
+          class="form-control"
+          type="text"
+          name="newCity"
+          id="newCityID"
+          formControlName="newCountryCode"
+        />
+      </div>
     </div>
+
     <div class="col-auto">
       <button
         class="btn btn-outline-primary"
@@ -27,8 +44,14 @@
     <tbody>
       <tr class="row" *ngFor="let city of cityList; let i = index">
         <td class="d-flex justify-content-center">
-          <a class="px-5 py-2" [routerLink]="['/weather/', city]">{{
-            city | titlecase
+          <img
+            class="me-auto"
+            src="https://flagsapi.com/{{
+              city.countryCode | uppercase
+            }}/flat/64.png"
+          />
+          <a class="px-5 py-2" [routerLink]="['/weather/', city.name]">{{
+            city.name | titlecase
           }}</a>
           <button
             class="btn btn-outline-danger ms-auto"
