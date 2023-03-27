@@ -1,4 +1,4 @@
-export interface Weather {
+export interface SimpleWeather {
   id: number
   main: string
   description: string

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Weather } from '../models/models';
+import { SimpleWeather } from '../models/models';
 import { WeatherService } from '../services/weather.service';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
@@ -11,7 +11,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class WeatherComponent implements OnInit {
 
-  currentWeather!: Weather
+  currentWeather!: SimpleWeather
   selectedCity!: string
 
   constructor(
