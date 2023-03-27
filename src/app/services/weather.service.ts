@@ -1,12 +1,14 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { firstValueFrom, map, Observable, Subject, tap } from "rxjs";
-import { Weather } from "./models/models";
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Subject, Observable, firstValueFrom } from 'rxjs';
+import { Weather } from '../models/models';
 
 const WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather"
 const APPID = "1ae78dc134dcba49bf27bd3219b15074"
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class WeatherService {
 
   onWeather = new Subject<Weather>
@@ -34,8 +36,8 @@ export class WeatherService {
         return w
       })
       .then(data => {
-        this.onWeather.next(data[0])
-        console.debug("SERVICE >",data[0])
+        // this.onWeather.next(data[0])
+        // console.debug("SERVICE >",data[0])
         return data[0]
       })
   }

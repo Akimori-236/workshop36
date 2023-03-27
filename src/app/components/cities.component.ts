@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
@@ -6,9 +6,9 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
   templateUrl: './cities.component.html',
   styleUrls: ['./cities.component.css']
 })
-export class CitiesComponent {
+export class CitiesComponent implements OnInit {
   newCityForm!: FormGroup
-  cityList: string[] = ["singapore", "tokyo", "melbourne"]
+  cityList: string[] = []
 
   constructor(private fb: FormBuilder) { }
 
@@ -16,6 +16,15 @@ export class CitiesComponent {
     this.newCityForm = this.fb.group({
       newCity: this.fb.control<string>('', [Validators.required]),
     })
+    // retrieve from localStorage?
+    let lsList = localStorage.getItem('cityList')
+    if (!!lsList) {
+      this.cityList = JSON.parse(lsList)
+    } else {
+      // init new list
+      this.cityList = ["singapore", "tokyo", "melbourne"]
+      localStorage.setItem('cityList', JSON.stringify(this.cityList))
+    }
   }
 
   addCity() {
@@ -25,9 +34,13 @@ export class CitiesComponent {
     if (!this.cityList.includes(newcityValue)) {
       this.cityList.push(newcityValue)
     }
+    // save to localStorage?
+    localStorage.setItem('cityList', JSON.stringify(this.cityList))
   }
 
   deleteCity(index: number) {
     this.cityList.splice(index, 1)
+    // save to localStorage?
+    localStorage.setItem('cityList', JSON.stringify(this.cityList))
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Weather } from '../models/models';
-import { WeatherService } from '../Weather.service';
+import { WeatherService } from '../services/weather.service';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 

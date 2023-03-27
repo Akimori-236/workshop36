@@ -6,7 +6,7 @@ import { CitiesComponent } from './components/cities.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { WeatherComponent } from './components/weather.component';
-import { WeatherService } from './Weather.service';
+import { WeatherService } from './services/weather.service';
 import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
