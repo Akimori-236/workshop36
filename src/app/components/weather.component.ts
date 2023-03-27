@@ -23,6 +23,12 @@ export class WeatherComponent implements OnInit {
   ngOnInit(): void {
     // get the route parameter / @PathVariable
     this.selectedCity = this.toTitleCase(this.activatedRoute.snapshot.params['city']);
+    // ANOTHER WAY TO GET PARAM
+    // this.param$ = this.activatedRoute.params.subscribe(
+    //   (params) => {
+    //     this.selectedCity = params['city']
+    //   }
+    // )
     this.title.setTitle(`Weather for ${this.selectedCity}`)
     console.debug("CITY > " + this.selectedCity)
 

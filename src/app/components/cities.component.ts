@@ -18,13 +18,13 @@ export class CitiesComponent implements OnInit {
       newCity: this.fb.control<string>('', [Validators.required]),
       newCountryCode: this.fb.control<string>('', [Validators.required, Validators.maxLength(2)]),
     })
-    // retrieve from localStorage?
+    // LOADING FROM LOCALSTORAGE
     let lsList = localStorage.getItem('cityList')
     if (!!lsList) {
       this.cityList = JSON.parse(lsList)
       this.cityList.sort()
     } else {
-      // init new list
+      // INITIALISE COUNTRY LIST
       this.cityList = [
         { name: "singapore", countryCode: "sg" },
         { name: "tokyo", countryCode: "jp" },
@@ -36,7 +36,7 @@ export class CitiesComponent implements OnInit {
   }
 
   addCity() {
-    // get value from form
+    // GET VALUES FROM FORM
     const cityCtrl: FormControl = this.newCityForm.get('newCity') as FormControl
     const countryCtrl: FormControl = this.newCityForm.get('newCountryCode') as FormControl
     const newcityValue: string = cityCtrl.value.toLowerCase()
@@ -46,13 +46,13 @@ export class CitiesComponent implements OnInit {
       this.cityList.push(newEntry)
       this.cityList.sort()
     }
-    // save to localStorage?
+    // SAVE TO LOCAL STORAGE
     localStorage.setItem('cityList', JSON.stringify(this.cityList))
   }
 
   deleteCity(index: number) {
     this.cityList.splice(index, 1)
-    // save to localStorage?
+    // SAVE TO LOCAL STORAGE
     localStorage.setItem('cityList', JSON.stringify(this.cityList))
   }
 }
