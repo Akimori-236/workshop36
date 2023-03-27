@@ -1,43 +1,49 @@
 <div class="container">
   <form class="form g-3" [formGroup]="newCityForm" (ngSubmit)="addCity()">
-    <div class="row">
-      <div class="col-auto">
-        <label class="form-label" for="newCityID">City:</label>
-      </div>
-      <div class="col-auto">
-        <input
-          class="form-control"
-          type="text"
-          name="newCity"
-          id="newCityID"
-          formControlName="newCity"
-        />
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-auto">
-        <label class="form-label" for="newCityID">Country Code:</label>
-      </div>
-      <div class="col-auto">
-        <input
-          class="form-control"
-          type="text"
-          name="newCity"
-          id="newCityID"
-          formControlName="newCountryCode"
-        />
-      </div>
-    </div>
-
-    <div class="col-auto">
-      <button
-        class="btn btn-outline-primary"
-        type="submit"
-        [disabled]="newCityForm.invalid"
-      >
-        Add
-      </button>
-    </div>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <label class="form-label" for="newCityID">City:</label>
+          </td>
+          <td>
+            <input
+              class="form-control"
+              type="text"
+              name="newCity"
+              id="newCityID"
+              formControlName="newCity"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label class="form-label" for="newCityID">Country Code:</label>
+          </td>
+          <td>
+            <input
+              class="form-control"
+              type="text"
+              name="newCity"
+              id="newCityID"
+              placeholder="Enter 2 Character Country Code"
+              formControlName="newCountryCode"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <button
+              class="btn btn-outline-primary px-auto"
+              type="submit"
+              [disabled]="newCityForm.invalid"
+            >
+              Add
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </form>
 
   <table class="mt-3 table table-hover">

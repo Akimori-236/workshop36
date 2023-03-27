@@ -22,7 +22,7 @@ export class CitiesComponent implements OnInit {
     let lsList = localStorage.getItem('cityList')
     if (!!lsList) {
       this.cityList = JSON.parse(lsList)
-      this.cityList.sort()
+      this.cityList.sort((a, b) => (a.name > b.name) ? 1 : -1)
     } else {
       // INITIALISE COUNTRY LIST
       this.cityList = [
@@ -30,7 +30,7 @@ export class CitiesComponent implements OnInit {
         { name: "tokyo", countryCode: "jp" },
         { name: "melbourne", countryCode: "au" }
       ]
-      this.cityList.sort()
+      this.cityList.sort((a, b) => (a.name > b.name) ? 1 : -1)
       localStorage.setItem('cityList', JSON.stringify(this.cityList))
     }
   }
@@ -39,12 +39,13 @@ export class CitiesComponent implements OnInit {
     // GET VALUES FROM FORM
     const cityCtrl: FormControl = this.newCityForm.get('newCity') as FormControl
     const countryCtrl: FormControl = this.newCityForm.get('newCountryCode') as FormControl
-    const newcityValue: string = cityCtrl.value.toLowerCase()
-    const newcountryValue: string = countryCtrl.value.toLowerCase()
+    const newcityValue: string = cityCtrl.value.toLowerCase().trim()
+    const newcountryValue: string = countryCtrl.value.toLowerCase().trim()
     const newEntry = { name: newcityValue, countryCode: newcountryValue }
+    // CHECK IF ENTRY EXISTS
     if (!this.cityList.includes(newEntry)) {
       this.cityList.push(newEntry)
-      this.cityList.sort()
+      this.cityList.sort((a, b) => (a.name > b.name) ? 1 : -1)
     }
     // SAVE TO LOCAL STORAGE
     localStorage.setItem('cityList', JSON.stringify(this.cityList))
