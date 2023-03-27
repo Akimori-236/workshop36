@@ -1,10 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject, Observable, firstValueFrom } from 'rxjs';
+import { Subject, Observable, firstValueFrom, lastValueFrom } from 'rxjs';
 import { SimpleWeather } from '../models/models';
+import { environment } from 'src/environments/environment';
 
-const WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather"
-const APPID = "1ae78dc134dcba49bf27bd3219b15074"
+const APPID = "***"
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +21,11 @@ export class WeatherService {
       .set('units', 'metric')
       .set('appid', APPID)
 
-    return this.http.get<SimpleWeather[]>(WEATHER_URL, { params })
+    return this.http.get<SimpleWeather[]>(environment.OpenWeatherApiUrl, { params })
       .pipe()
   }
 
-  getWeather(city: string): Promise<SimpleWeather> {
+  getSimpleWeather(city: string): Promise<SimpleWeather> {
     return firstValueFrom(
       this.getWeatherAsObservable(city)
     )
@@ -42,4 +42,12 @@ export class WeatherService {
       })
   }
 
+  getWeather(city: string) {
+    const params = new HttpParams()
+      .set('q', city)
+      .set('units', 'metric')
+      .set('appid', APPID)
+
+    return lastValueFrom(this.http.get(environment.OpenWeatherApiUrl, { params: params }))
+  }
 }

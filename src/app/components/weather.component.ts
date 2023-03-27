@@ -27,7 +27,7 @@ export class WeatherComponent implements OnInit {
     console.debug("CITY > " + this.selectedCity)
 
     // get weather promise from service
-    this.weatherSvc.getWeather(this.selectedCity)
+    this.weatherSvc.getSimpleWeather(this.selectedCity)
       .then((response) => { this.currentWeather = response })
   }
 
