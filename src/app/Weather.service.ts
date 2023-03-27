@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { firstValueFrom, map, Observable, Subject, tap } from "rxjs";
-import { Weather } from "./models";
+import { Weather } from "./models/models";
 
 const WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather"
 const APPID = "1ae78dc134dcba49bf27bd3219b15074"
