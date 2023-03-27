@@ -4,7 +4,7 @@ import { firstValueFrom, map, Observable, Subject, tap } from "rxjs";
 import { Weather } from "./models";
 
 const WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather"
-const APPID = "__YOUR_KEY_HERE__"
+const APPID = "1ae78dc134dcba49bf27bd3219b15074"
 
 @Injectable()
 export class WeatherService {
@@ -35,6 +35,7 @@ export class WeatherService {
       })
       .then(data => {
         this.onWeather.next(data[0])
+        console.debug("SERVICE >",data[0])
         return data[0]
       })
   }

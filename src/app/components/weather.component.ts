@@ -1,5 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { Weather } from '../models';
 import { WeatherService } from '../Weather.service';
 import { ActivatedRoute } from '@angular/router';
@@ -10,33 +9,34 @@ import { Title } from '@angular/platform-browser';
   templateUrl: './weather.component.html',
   styleUrls: ['./weather.component.css']
 })
-export class WeatherComponent implements OnInit, OnDestroy {
+export class WeatherComponent implements OnInit {
 
-  weatherSub!: Subscription
-  currentWeather!: Weather[]
+  currentWeather!: Weather
   selectedCity!: string
 
   constructor(
-    // private weatherSvc: WeatherService,
+    private weatherSvc: WeatherService,
     private activatedRoute: ActivatedRoute,
     private title: Title
   ) { }
 
   ngOnInit(): void {
-    // subscribe to weather service
-    // this.weatherSub = this.weatherSvc.onWeather.subscribe(
-    //   (response) => { this.currentWeather = response }
-    // )
     // get the route parameter / @PathVariable
-    this.selectedCity = this.activatedRoute.snapshot.params['city'];
+    this.selectedCity = this.toTitleCase(this.activatedRoute.snapshot.params['city']);
     this.title.setTitle(`Weather for ${this.selectedCity}`)
     console.debug("CITY > " + this.selectedCity)
+
+    // get weather promise from service
+    this.weatherSvc.getWeather(this.selectedCity)
+      .then((response) => { this.currentWeather = response })
   }
 
-  ngOnDestroy(): void {
-    // this.weatherSub.unsubscribe();
+  toTitleCase(str: string): string {
+    let strArr = str.toLowerCase().split(' ');
+    for (var i = 0; i < strArr.length; i++) {
+      strArr[i] = strArr[i].charAt(0).toUpperCase() + strArr[i].slice(1);
+    }
+    return strArr.join(' ');
   }
-
-  // trigger weather service
-
 }
+

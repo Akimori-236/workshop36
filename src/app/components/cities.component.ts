@@ -26,4 +26,8 @@ export class CitiesComponent {
       this.cityList.push(newcityValue)
     }
   }
+
+  deleteCity(index: number) {
+    this.cityList.splice(index, 1)
+  }
 }

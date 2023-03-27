@@ -7,10 +7,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { WeatherComponent } from './components/weather.component';
 import { WeatherService } from './Weather.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
-  { path: '', component: CitiesComponent},
-  { path: 'weather/:city', component: WeatherComponent},
+  { path: '', component: CitiesComponent },
+  { path: 'weather/:city', component: WeatherComponent },
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ]
 
 @NgModule({
@@ -22,9 +24,11 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [WeatherService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
