@@ -37,10 +37,12 @@ export class CitiesComponent implements OnInit {
 
   addCity() {
     // GET VALUES FROM FORM
-    const cityCtrl: FormControl = this.newCityForm.get('newCity') as FormControl
-    const countryCtrl: FormControl = this.newCityForm.get('newCountryCode') as FormControl
-    const newcityValue: string = cityCtrl.value.toLowerCase().trim()
-    const newcountryValue: string = countryCtrl.value.toLowerCase().trim()
+    // const cityCtrl: FormControl = this.newCityForm.get('newCity') as FormControl
+    // const countryCtrl: FormControl = this.newCityForm.get('newCountryCode') as FormControl
+    // const newcityValue: string = cityCtrl.value.toLowerCase().trim()
+    // const newcountryValue: string = countryCtrl.value.toLowerCase().trim()
+    const newcityValue: string = this.newCityForm?.value['newCity']
+    const newcountryValue: string = this.newCityForm?.value['newCountryCode']
     const newEntry = { name: newcityValue, countryCode: newcountryValue }
     // CHECK IF ENTRY EXISTS
     if (!this.cityList.some(city => city.name == newEntry.name)) {
@@ -49,6 +51,8 @@ export class CitiesComponent implements OnInit {
     }
     // SAVE TO LOCAL STORAGE
     localStorage.setItem('cityList', JSON.stringify(this.cityList))
+    // RESET FORM
+    this.newCityForm.reset()
   }
 
   deleteCity(index: number) {
